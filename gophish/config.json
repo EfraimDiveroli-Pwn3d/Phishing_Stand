@@ -1,0 +1,22 @@
+{
+  "admin_server": {
+    "listen_url": "0.0.0.0:3333",
+    "use_tls": true,
+    "cert_path": "/opt/gophish/certs/cert.pem",
+    "key_path": "/opt/gophish/certs/key.pem"
+  },
+  "phish_server": {
+    "listen_url": "0.0.0.0:443",
+    "use_tls": true,
+    "cert_path": "/opt/gophish/certs/cert.pem",
+    "key_path": "/opt/gophish/certs/key.pem"
+  },
+  "db_name": "sqlite3",
+  "db_path": "/opt/gophish/gophish.db",
+  "migrations_prefix": "db/db_",
+  "contact_address": "",
+  "logging": {
+    "filename": "gophish.log",
+    "level": "info"
+  }
+}

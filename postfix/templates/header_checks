@@ -1,0 +1,2 @@
+/^X-Mailer:.*gophish/i  REPLACE X-Mailer: Mozilla Thunderbird 128.0
+/^X-Gophish-/i  IGNORE

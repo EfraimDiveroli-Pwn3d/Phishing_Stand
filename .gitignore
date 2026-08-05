@@ -1,0 +1,15 @@
+certs/*
+docker-compose.yml
+TODO
+.idea
+.venv
+evilginx2/data/*
+evilginx2/phishlets/*
+gophish/gophish.db
+postfix/dkim/*
+.env
+.deploy_state
+export_temp_*/
+phishing_stand_export_*.tar.gz*
+application.log
+*.tar.gz

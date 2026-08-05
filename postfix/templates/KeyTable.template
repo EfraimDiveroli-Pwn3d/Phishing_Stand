@@ -1,0 +1,1 @@
+mail._domainkey.${ALLOWED_SENDER_DOMAINS} ${ALLOWED_SENDER_DOMAINS}:mail:/etc/opendkim/keys/${ALLOWED_SENDER_DOMAINS}.private

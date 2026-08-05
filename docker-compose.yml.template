@@ -1,0 +1,82 @@
+networks:
+  mailer-net:
+    driver: bridge
+
+services:
+  milter:
+    build: ./milter
+    container_name: milter
+    restart: unless-stopped
+    networks:
+      - mailer-net
+
+  postfix:
+    build: ./postfix
+    container_name: ${POSTFIX_BACKEND}
+    hostname: mx01.${BASE_DOMAIN}
+    restart: unless-stopped
+    environment:
+      - HOSTNAME=${BASE_DOMAIN}
+      - ALLOWED_SENDER_DOMAINS=${MX_DOMAIN}
+    volumes:
+      - ./postfix/dkim:/etc/opendkim/keys:rw
+      - ./certs/live/${BASE_DOMAIN}/fullchain.pem:/etc/postfix/certs/fullchain.pem:ro
+      - ./certs/live/${BASE_DOMAIN}/privkey.pem:/etc/postfix/certs/privkey.pem:ro
+    networks:
+      - mailer-net
+    depends_on:
+      - milter
+
+  gophish:
+    image: gophish/gophish:latest
+    container_name: ${GOPHISH_BACKEND}
+    hostname: mx02.${BASE_DOMAIN}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3333:3333"
+    volumes:
+      - ./gophish/config.json:/opt/gophish/config.json:ro
+      - ./gophish/gophish.db:/opt/gophish/gophish.db
+      - ./certs/live/${BASE_DOMAIN}/fullchain.pem:/opt/gophish/certs/cert.pem:ro
+      - ./certs/live/${BASE_DOMAIN}/privkey.pem:/opt/gophish/certs/key.pem:ro
+    networks:
+      - mailer-net
+    depends_on:
+      - postfix
+
+  evilginx2:
+    build: ./evilginx2
+    container_name: ${EVILGINX_BACKEND}
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./evilginx2/phishlets:/app/phishlets:ro
+      - ./evilginx2/data:/root/.evilginx
+      - ./certs/live/${BASE_DOMAIN}/fullchain.pem:/root/.evilginx/crt/${BASE_DOMAIN}.crt:ro
+      - ./certs/live/${BASE_DOMAIN}/privkey.pem:/root/.evilginx/crt/${BASE_DOMAIN}.key:ro
+    networks:
+      - mailer-net
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      - TRACK_DOMAIN=${TRACK_DOMAIN}
+      - EVIL_DOMAIN=${EVIL_DOMAIN}
+      - MX_DOMAIN=${MX_DOMAIN}
+      - BASE_DOMAIN=${BASE_DOMAIN}
+      - EVILGINX_BACKEND=${EVILGINX_BACKEND}
+      - GOPHISH_BACKEND=${GOPHISH_BACKEND}
+    volumes:
+      - ./certs/live/${BASE_DOMAIN}/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
+      - ./certs/live/${BASE_DOMAIN}/privkey.pem:/etc/nginx/certs/privkey.pem:ro
+    networks:
+      - mailer-net
+    depends_on:
+      - gophish
+      - evilginx2

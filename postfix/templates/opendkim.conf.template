@@ -1,0 +1,14 @@
+Syslog yes
+SyslogSuccess yes
+LogWhy yes
+
+UserID opendkim:opendkim
+Socket inet:8891@0.0.0.0
+
+KeyTable refile:/etc/opendkim/KeyTable
+SigningTable refile:/etc/opendkim/SigningTable
+ExternalIgnoreList refile:/etc/opendkim/TrustedHosts
+InternalHosts /etc/opendkim/TrustedHosts
+
+OversignHeaders From,Sender,Reply-To,Cc,Subject,Date
+RequireSafeKeys Yes
