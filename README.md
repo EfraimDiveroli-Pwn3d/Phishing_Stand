@@ -55,7 +55,7 @@
 4. **Postfix** - почтовый сервер для отправки фишинговых сообщений.
 5. **Nginx** - обратный прокси-сервер с SSL/TLS для приема входящих запросов.
 
-<img width="2100" height="1036" alt="Phishing_Stand" src="https://github.com/user-attachments/assets/e407d8cc-e0f9-471d-a79b-2ec8ca5e0ce8" />
+<img width="2100" height="1036" alt="image" src="https://github.com/user-attachments/assets/4e3d0c09-b1bb-4091-b8bd-af008c304700" />
 
 ---
 
@@ -100,10 +100,9 @@ sudo ./management.py
 ```
 Следуйте подсказкам на экране для ввода доменных имен и настройки DNS.
 
-<img width="682" height="648" alt="image" src="https://github.com/user-attachments/assets/5259e60b-3cab-421e-a666-d84cfff029fd" />
+<img width="682" height="648" alt="image" src="https://github.com/user-attachments/assets/a859bf9b-cb62-447b-8537-b9deaf084b75" />
 
-
-<img width="1078" height="612" alt="image" src="https://github.com/user-attachments/assets/f2d9a2d0-7875-4e69-9847-e06905f770e8" />
+<img width="1078" height="612" alt="image" src="https://github.com/user-attachments/assets/0eba077e-9b93-4748-8914-38b91eab1179" />
 
 ---
 
@@ -220,7 +219,7 @@ ssh -L 3333:127.0.0.1:3333 root@<IP_VPS>
 https://127.0.0.1:3333
 ```
 
-<img width="1491" height="712" alt="image" src="https://github.com/user-attachments/assets/ac46fefe-ce80-479e-a5eb-9873b0d5b688" />
+<img width="1491" height="712" alt="image" src="https://github.com/user-attachments/assets/6c801394-18cd-4a70-881a-861f317700e6" />
 
 ### Доступ к консоли Evilginx2
 ```
@@ -228,7 +227,7 @@ docker exec -it evilginx2 sh
 ./evilginx -developer -p phishlets/
 ```
 
-<img width="969" height="712" alt="image" src="https://github.com/user-attachments/assets/4b06a32d-b6a7-456b-9a9c-8c95e158b981" />
+<img width="969" height="712" alt="image" src="https://github.com/user-attachments/assets/3e5d88d8-e217-4c40-8867-18d8e6950264" />
 
 ---
 
