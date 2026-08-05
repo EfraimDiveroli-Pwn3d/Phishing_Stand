@@ -213,10 +213,10 @@ docker compose up -d
 Порты проброшены только на localhost в целях безопасности. Используйте SSH-туннель:
 ```commandline
 # В локальном терминале выполните:
-ssh -L 3333:127.0.0.1:3333 root@<IP_VPS>
+ssh -L 8080:127.0.0.1:3333 root@<IP_VPS>
 
 # Откройте в браузере:
-https://127.0.0.1:3333
+https://127.0.0.1:8080
 ```
 
 <img width="1491" height="712" alt="image" src="https://github.com/user-attachments/assets/6c801394-18cd-4a70-881a-861f317700e6" />
